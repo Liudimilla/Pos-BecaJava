@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+<title>Agenda</title>
+<style>
+body {
+	background-color: #FFDEAD;
+}
+h1 {
+    background-color: #DEB887;
+}
+h {
+    background-color: #DC143C);
+}
+</style>
+
+</h:head>
+
+<h:body>
+ <h:form id="formPessoa">
+
+<h1>Sua agenda Pessoal</h1>
+<br/>
+<h3>Dados pessoais</h3><h:commandButton value= "Buscar" action="dadosPessoais"/>
+<br/>
+<h3>Dados Emergenciais</h3><h:commandButton value= "Buscar" action="dadosemergiciais"/>
+<br/>
+<br/>
+Contato
+<br/>
+<h:commandButton value="Lista de Contato" action="listacontatos"/>
+<h:commandButton value="Adicionar Contato" action="adicionarcontato"/>
+<br/>
+<br/>
+Calendario
+<h:commandButton value="Acesse o seu calendario"/>
+<br/>
+<br/>
+<h2 >Tarefas</h2>
+<br/>
+Dia:
+<h:inputText id="campoDia" value="#{pessoaBean.dia}"/> 
+<br/>
+Hora
+<h:inputText id="campoHora" value="#{pessoaBean.hora}"/> 
+<br/>
+Assunto
+<h:inputText id="campoAssunto" value="#{pessoaBean.assunto}"/>
+<br/>
+
+<h:outputText value="#{pessoaBean.tarefaCompleta}"/>
+<br/>
+
+<h:commandButton value="Mostrar Tarefa" action="#{pessoaBean.mostrarTarefa}"/>
+
+</h:form>
+</h:body>
+
+
+</html>
