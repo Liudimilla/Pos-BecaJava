@@ -5,12 +5,21 @@
 
 <h:head>
 <title>Agenda</title>
+<style>
+div {
+  width: 320px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: 0;
+}
+</style>
 </h:head>
 <h:body>
 <h:form id="formPessoa">
 
 <h1>Dados pessoais</h1>
-<br/>
+<img src="imagem/contato.PNG" width="350" height="263" alt="contato"/>
+<div>
 Grupo sanguineo: Tipo A
 <br/>
 Alergias: Nenhuma
@@ -22,12 +31,12 @@ Tel:9999-9999
 Cel: 2323-2323
 <br/>
 End: Rua 9, nº2
+</div>
+
+
 <br/>
-
 <br/>
-
-
-<h:commandButton value="Voltar" action="explicita"/>
+<h:commandButton value="Voltar" action="dadoscontato"/> 
 </h:form>
 </h:body>
 

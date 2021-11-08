@@ -7,20 +7,14 @@
     
     <navigation-rule>
    
-    <from-view-id>/listacontatos.xhtml</from-view-id>
-    <navigation-case>
-    <from-outcome>explicita</from-outcome>
-    <to-view-id>/dadoscontato.jsf</to-view-id>
-    </navigation-case>
-    
-    
-    
-    
-    </navigation-rule>
-    
-    
+    <from-view-id>*.xhtml</from-view-id>
    
-  
-    
-
+    <navigation-case>
+    <from-outcome>pagina_a</from-outcome>
+    <to-view-id>/dadoscontato.xhtml</to-view-id>
+    </navigation-case>
+   
+ 
+   
+    </navigation-rule>    
 </faces-config>
