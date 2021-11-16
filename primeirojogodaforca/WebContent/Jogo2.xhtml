@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<f:view contentType="text/html;charset=UFT-8" encoding="UTF-8">
+	<head>
+
+<style>
+body {
+	background-color: #DEFFAD;
+}
+
+h1 {
+	text-shadow: 0 0 3px #FF0000, 0 0 5px #DEADFF, 2px 2px 4px #000000;
+	text-align: center;
+	color: white;
+	font-size: 60px
+}
+
+.
+btn-np {
+	margem-inferior: 40px;
+}
+
+.
+letra {tamanho da fonte:50px;
+	peso-fonte: negrito;
+	margem-direita: 20px
+}
+
+.
+letra-jogar {
+	largura: 30px;
+	altura: 30px;
+	margem-superior: 20px;
+	margem-direita: 10px; tamanho da fonte : 20px;
+	margem-superior: 40px;
+}
+
+.
+sublinhar {
+	largura: 100px; fundo da borda : 5px vermelho sólido;
+	altura: 50px;
+}
+
+.
+esconder {
+	exibição: nenhum;
+}
+</style>
+	</head>
+	<h:body>
+		<h2>Nivel 2 !!!</h2>
+
+		<h:form>
+			<h:commandButton class="btn-np" value="Nova Palavra"
+				action="#{jogoBean.novaPalavra}" />
+		</h:form>
+
+		<c:forEach items="#{jogoBean.letras}" var="letra">
+			<h:outputLabel styleClass="letra" value="_"
+				rendered="#{not letra.contem}" />
+			<h:outputLabel styleClass="letra" value="#{letra.letra}"
+				rendered="#{letra.contem}" />
+		</c:forEach>
+
+		<h:form>
+			<h:inputText styleClass="letra-jogar" valor="#{jogoBean.letraJogada}"
+				maxlength="1" />
+			<h:commandButton value="Jogar" action="#{jogoBean.mostrarLetra}" />
+			<h:form>
+				<br />
+				<br />
+				<br />
+			</h:form>
+			<h:form>
+			    <h:inputText id="apostador" value="#{jogoBean.apostador}"/><br/>
+			    <h:inputText id="palavra" value="#{jogoBean.palavra}"/><br/>
+				<h:outputText value="#{jogoBean.apostar}"/><br/>
+				<h:commandButton value="Apostador" action="#{jogoBean.aposta}"/>
+			</h:form>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<h:commandButton value="Voltar" action="parte1" />
+		</h:form>
+	</h:body>
+</f:view>
+</html>

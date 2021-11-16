@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jogo da Forca</title>
+
+<style type="text/css">
+
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+html,body{font-family:Verdana,sans-serif;font-size:15px;line-height:120%}html{overflow-x:hidden}
+
+
+#TOP {
+	position: fixed;
+	background-color: rgb(128, 0, 128);
+	width: 100%;
+	height: 5%;
+}
+
+#LEFT {
+	position: fixed;
+	background-color: rgb(128, 0, 128);
+	width: 7.5%;
+	height: 100%;
+}
+
+#RIGHT {
+	position: fixed;
+	background-color: rgb(128, 0, 128);
+	width: 7.5%;
+	height: 100%;
+	right: 0%;
+}
+
+#MEIO {
+	position: fixed;
+	background-color: rgb(128, 0, 128);
+	width: 100%;
+	height: 7%;
+	top: 55%;
+}
+
+#BOTTOM {
+	position: fixed;
+	background-color: #38002B;
+	width: 100%;
+	height: 7%;
+	bottom: 0%;
+	font-size: 130%;
+}
+
+#h01 {
+	display: none;
+	line-height: 0%;
+	letter-spacing: 2px;
+	text-shadow: 0px 4px 8px #888888;
+	text-align: center;
+	font-size: 130%;
+	color: #F00;
+	position: absolute;
+	left: 0%;
+	top: 50%;
+	-moz-transform:    rotate(-35deg);
+	-webkit-transform: rotate(-35deg);
+	-ms-transform:     rotate(-35deg);
+	-o-transform:      rotate(-35deg);
+}
+
+#AVISO {
+	position: absolute;
+	line-height: 0%;
+	letter-spacing: 0.5px;
+	top: 56%;
+	left: 7.5%;
+	font-size: 120%;
+}
+
+#EE {
+	display: none;
+	position: absolute;
+	top: 56%;
+	left: 25%;
+	font-size: 65%;
+}
+
+#rdp {
+	position: relative;
+	text-align: center;
+	bottom: 5%;
+	font-size: 80%;
+}
+
+#h02 {
+	display: block;
+	position: absolute;
+	letter-spacing: 0.2px;
+	text-shadow: 0px 4px 8px #000;
+	font-size: 80%;
+	right: 5px;
+	top: 5px;
+}
+
+#X01 {
+	display: block;
+	position: relative;
+	top: 15%;
+	line-height: 10%;
+	color: #000;
+	text-shadow: 0px 4px 8px #000;
+	text-align: center;
+	font-size: 130%;
+}
+
+#h99 {
+	display: block;
+	position: absolute;
+	line-height: 100%;
+	left: 0.5%;
+	bottom: -2.5%;
+	color: #000;
+	font-size: 120%;
+}
+
+#forca {
+	display: block;
+	background: #4e3a0b;
+	height: 160px;
+	position: relative;
+	width: 16px;
+	box-shadow: -3px -2px 0px 0px #888888;
+}
+
+#forca:after {
+	background: #4e3a0b;
+	content: "";
+	height: 15px;
+	left: 0px;
+	position: absolute;
+	top: -5px;
+	width: 110px;
+	box-shadow: -3px -3px 0px 0px #888888;
+}
+
+#forca:before {
+	background: #4e3a0b;
+	content: "";
+	height: 15px;
+	left: -2px;
+	position: absolute;
+	top: 15px;
+	width: 70px;
+	-ms-transform: rotate(-45deg); /* IE 9 */
+	-webkit-transform: rotate(-45deg); /* Chrome, Safari, Opera */
+	transform: rotate(-45deg);
+}
+
+#DIVCORPO {
+	display: block;
+	position: fixed;
+	width: 85%;
+	height: 50%;
+	right: 7.5%;
+	top: 5%;
+	padding: 15px 0px 0px 15px;
+	border: 1px ridge black;
+	border-radius: 8px;
+}
+
+#ROSTO {
+	display: none;
+	line-height: 24px;
+	letter-spacing: 0.25px;
+	font-size: 12px;
+	text-shadow: 0px 0px 1px #F00;
+	position: relative;
+	left: 0.5px;
+	top: -16px;
+}
+
+#CHAPEU {
+	display: none;
+	width: 19.2px;
+	height: 12.8px;
+	background-color: black;
+	position: absolute;
+	left: 73.4px;
+	top: 22px;
+	border-radius: 12.5px;
+}
+
+#ABA {
+	display: none;
+	width: 32px;
+	height: 3.2px;
+	background-color: black;
+	position: relative;
+	left: -3.5px;
+	top: 0px;
+	border-radius: 12px;
+}
+
+#CABECA {
+	display: none;
+	width: 25.6px;
+	height: 26.4px;
+	background-color: #FFCCCC;
+	position: absolute;
+	left: 70px;
+	top: 30px;
+	padding: 0px;
+	border-radius: 25px;
+}
+
+#PESCOCO {
+	display: none;
+	width: 11.2px;
+	height: 8px;
+	background-color: #FFCCCC;
+	position: absolute;
+	left: 7px;
+	top: 26px;
+	border-radius: 2px;
+}
+
+#BOCA { 
+	display: none;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	position: relative;
+	left: 7.8px;
+	top: -40px;
+	box-shadow: 0px 1px 0px 0px red;
+}
+
+#QUEIXO { 
+	display: none;
+	width: 0px;
+	height: 0px;
+	border-radius: 50%;
+	position: absolute;
+	left: 13px;
+	top: 25px;
+	box-shadow: 0px 0px 2px 1px red;
+}
+
+#TRONCO {
+	display: none;
+	width: 32px;
+	height: 48px;
+	background-color: blue;
+	position: absolute;
+	left: 66.5px;
+	top: 57px;
+	border-radius: 50% / 40% 40% 8% 8%;
+}
+
+#BRACOD1 {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: blue;    
+	position: absolute;
+	left: -10px;
+	top: -2px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(45deg); /* IE 9 */
+	-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+	transform: rotate(45deg);
+}
+
+#BRACOD2 {
+	display: none;
+	width: 10px;
+	height: 30px;
+	background-color: #FFCCCC;    
+	position: relative;
+	left: -8px;
+	top: 26px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(45deg); /* IE 9 */
+	-webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+	transform: rotate(45deg);
+}
+
+#MAOD {
+	display: none;
+	width: 16px;
+	height: 16px;
+	background-color: black;    
+	position: absolute;
+	right: -2px;
+	bottom: -5px;    
+	border-radius: 12.5px;
+}
+
+#BRACOE1 {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: blue;    
+	position: absolute;
+	right: -10px;
+	top: -2px;    
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(135deg); /* IE 9 */
+	-webkit-transform: rotate(135deg); /* Chrome, Safari, Opera */
+	transform: rotate(135deg);
+}
+
+#BRACOE2 {
+	display: none;
+	width: 10px;
+	height: 30px;
+	background-color: #FFCCCC;    
+	position: relative;
+	right: -8px;
+	top: -4px;    
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(145deg); /* IE 9 */
+	-webkit-transform: rotate(145deg); /* Chrome, Safari, Opera */
+	transform: rotate(145deg);
+}
+
+#MAOE {
+	display: none;
+	width: 16px;
+	height: 16px;
+	background-color: black;    
+	position: absolute;
+	left: -4px;
+	top: -5px; 
+	border-radius: 12.5px;
+}
+
+#COXAD {
+	display: none;
+	width: 16px;
+	height: 30px;
+	background-color: blue;    
+	position: absolute;
+	right: 17.8px;
+	bottom: -20.50px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(12.5deg); /* IE 9 */
+	-webkit-transform: rotate(12.5deg); /* Chrome, Safari, Opera */
+	transform: rotate(12.5deg);
+}
+
+#PERNAD {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: #FFCCCC;    
+	position: absolute;
+	left: -1px;
+	bottom: -28.5px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(12.5deg); /* IE 9 */
+	-webkit-transform: rotate(12.5deg); /* Chrome, Safari, Opera */
+	transform: rotate(6.25deg);
+}
+
+#COXAE {
+	display: none;
+	width: 16px;
+	height: 30px;
+	background-color: blue;    
+	position: absolute;
+	left: 17.8px;
+	bottom: -20.50px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(-10deg); /* IE 9 */
+	-webkit-transform: rotate(-10deg); /* Chrome, Safari, Opera */
+	transform: rotate(-10deg);
+}
+
+#PERNAE {
+	display: none;
+	width: 12px;
+	height: 35px;
+	background-color: #FFCCCC;    
+	position: absolute;
+	right: -7px;
+	bottom: -26.50px;
+	border-radius: 10px;
+	/* Rotate div */
+	-ms-transform: rotate(-10deg); /* IE 9 */
+	-webkit-transform: rotate(-10deg); /* Chrome, Safari, Opera */
+	transform: rotate(-30deg);
+}
+
+#PEE {
+	display: none;
+	width: 20.8px;
+	height: 6.4px;
+	background-color: black;    
+	position: absolute;
+	right: 0px;
+	bottom: 1px;    
+	border-radius: 4px;
+}
+
+#PED {
+	display: none;
+	width: 20.8px;
+	height: 6.4px;
+	background-color: black;    
+	position: absolute;
+	right: 0px;
+	bottom: 1px;    
+	border-radius: 4px;
+}
+
+hr { 
+	border-style: inset;
+	border-width: 1px;
+	color: BLACK;
+	width: 90%;
+}
+
+#DIV00 {
+	display: block;
+	position: absolute;
+	width: 85%;
+	right: 7.5%;
+	top: 62%;
+	padding: 15px 0px 15px 0px;
+	border: 1px ridge black;
+	border-radius: 8px;
+}
+
+#DIV01 {
+	display: block;
+	position: fixed;
+	width: 85%;
+	right: 7.5%;
+	top: 62%;
+	padding: 15px 0px 15px 0px;
+	border: 1px ridge black;
+	border-radius: 8px;
+}
+
+#Ltr {
+	position:absolute;
+	left: 1.5%;
+	top: -10%;
+	line-height: 0px;
+	font-size: 80%;
+}
+
+input[type=text]{
+	font-size: 1em;
+	margin: 1px;
+	border:2.5px solid #DDD;
+	border-radius: 4px;
+	text-align: center;
+}
+
+input[type=radio]{
+	font-size: 10px;
+	width: 5%;
+}
+
+form.style1 label {
+	float:left;
+	margin-right:0.5em;
+	padding-top:0.2em;
+	text-align:right;
+	font-weight:bold;
+}
+
+.button {
+	display: none;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+	color: #FF0;
+	background-color: #00F;
+	border: none;
+	border-radius: 6px;
+	box-shadow: 0 4px #999;
+}
+
+.button:hover {
+	background-color: #0F0;
+}
+
+.button:active {
+	background-color: #000;
+	box-shadow: 0 2px #666;
+	transform: translateY(1.5px);
+}
+
+</style>
+</head>
+<body>
+	<div id="TOP"><h1 id="X01">JOGO DA FORCA</h1></div>
+	<div id="LEFT"></div>
+	<div id="RIGHT"></div>
+	<div id="MEIO"></div>
+	<div id="BOTTOM"><p id="rdp"><a href="forca.xhtml" target="_blank"><i> Proximo Nivel 2</i></a></p></div>
+
+<div id="DIVCORPO">
+    <div id="forca">
+	<div id="CHAPEU"></div>
+	    <div id="CABECA">
+	    <div id="ABA"></div>
+	    <p id="ROSTO">(°ʖ°)</p>
+	    <div id="BOCA"></div>
+	    <div id="QUEIXO"></div>
+	    <div id="PESCOCO"></div>
+	    </div>
+
+	<div id="TRONCO">
+	<div id="BRACOD1"><div id="BRACOD2"><div id="MAOD"></div></div></div>
+	<div id="BRACOE1"><div id="BRACOE2"><div id="MAOE"></div></div></div>
+	<div id="COXAD"><div id="PERNAD"><div id="PED"></div></div></div>
+	<div id="COXAE"><div id="PERNAE"><div id="PEE"></div></div></div>
+	</div>
+	<h1 id="h01"></h1>
+    </div>
+	<h1 id="h02"></h1>
+	<p id="h99"></p>
+</div>
+
+    <div id="DIV01" align="left">
+	<p id="Ltr" style="display:none"><b>Letras: </b></p>
+
+<form id="FormPlv" action="" class="style1" style="display:none">
+	<label for="TxtPlv">Palavra:</label>
+	<input type="text" name="TxtPlv" id="TxtPlv" size="12" autofocus/>
+</form>
+
+	<form id="FormOpc" action="" style="display:block";>
+	<input type="radio" name="tipowrd" onclick="PegaTP(this.value)" value="Dicionário">Dicionário<br>
+	<input type="radio" name="tipowrd" onclick="PegaTP(this.value)" value="Livre_Escolha">Livre Escolha<br>
+	<input type="radio" name="tipowrd" onclick="PegaTP(this.value)" value="Fruta">Frutas<br>
+	<input type="radio" name="tipowrd" onclick="PegaTP(this.value)" value="Time">Times<br>
+	</form>
+
+<form id="FormLTR" action="" class="style1" style="display:none">
+	<label for="TxtLtr">Letra:</label>
+	<input type="text" name="TxtLtr" id="TxtLtr" size="4"/>
+</form>
+
+	<p id="h00" style="display:none"></p>
+    </div>
+
+	<audio id="myAudio" controls="controls" autobuffer="autobuffer" style="display:none;position:absolute;left:7.5%;top:56.5%;">
+	<source src="">
+	</audio>
+
+<script>
+var LETTERS="", WRD01=" ", WRD02=" ", WRD03=" ", WRDSA="", patt=" ", COUNT=0, ARWRD01=[], ARWRD02=[], ERR=0, ERROU=0, TPWRD="", STT=0, LINK="";
+var X = document.getElementById("DIVCORPO");
+var Y = X.getElementsByTagName("*");
+var snd="", ORGN="";
+var audio = document.getElementById("myAudio");
+
+function toca(ORGN) {
+	if (ORGN=="ERRO"){ audio.src = eval("SOUND"+"1"+"\(\)");}
+	else if (ORGN=="ACERTO") { audio.src = eval("SOUND"+"2"+"\(\)");}
+	audio.play();
+}
+
+function RELOAD() {
+	window.location.reload(true);
+}
+
+function PegaTP(tipowrd) {
+	document.getElementById('AVISO').style.display = "none";
+	/* Armazena a var TPWRD e "chama" a function correspondente */
+	TPWRD = tipowrd;
+	eval ("Pega"+TPWRD+"\(\)");
+}
+
+function PegaLivre_Escolha() {
+	document.getElementById('FormOpc').style.display = "none";
+	document.getElementById('FormPlv').style.display = "block";
+	document.getElementById('BTN02').style.display = "block";
+}
+
+function PegaPalavra() {
+	WRD01 = document.getElementById("FormPlv").elements.namedItem("TxtPlv").value.toUpperCase();
+	WRD01 = WRD01.replace(/[ ]/g,"-");
+	document.getElementById('BTN02').style.display = "none";
+	document.getElementById('FormPlv').style.display = "none";
+	PegaDicionário();
+}
+
+function PegaFruta() {
+	FRUTAS=["ABACATE", "BANANA","GOIABA", "JACA", "MANGA", "MORANGO"];
+	var tam = FRUTAS.length;	
+	var X = Math.floor(Math.random() * tam);
+	WRD01 = FRUTAS[X]; //PEGA FRUTA
+	PegaDicionário();
+}
+
+function PegaTime() {
+	TIMES=["CORINTHIANS", "SANTOS"];
+	var tam = TIMES.length;
+	var X = Math.floor(Math.random() * tam);
+	WRD01 = TIMES[X]; //PEGA TIME
+	PegaDicionário();
+}
+
+function PegaDicionário() {
+	/* DEFINE PALAVRA & VARS */
+ 	document.getElementById('FormOpc').style.display = "none";
+	document.getElementById('TxtLtr').style.display = "block";
+	document.getElementById('Ltr').style.display = "block";
+	document.getElementById('BTN01').style.display = "block";
+	document.getElementById("BTN03").style.display = "block";
+	document.getElementById('FormLTR').style.display = "block"; //TESTES 
+
+		if (WRD01==" " || WRD01 == "") {
+		var LETTERS="ABCDEFGHIJLMNOPQRSTUVXZ"; //DEFINE LETRA INICIAL
+		var tam = LETTERS.length;
+		var X = Math.floor(Math.random() * tam);
+		var res = LETTERS.charAt(X);
+		var Y = Math.floor(Math.random() * 119);
+		WRD01 = eval("WORD_"+res+"\("+Y+"\)"); //PEGA PALAVRA
+		}
+	WRD02 = WRD01.replace(/./g,"_"); // TRANSFORMA LETRAS em "_"
+	document.getElementById("h00").innerHTML = WRD02; //GUARDA WRD02
+	document.getElementById('h99').innerHTML = WRD01.replace(/./g,"_ ");
+}
+
+function TESTA_LETRA(ltr) {
+	var EE = document.getElementById('EE').style.display;
+	if (EE=='block') {document.getElementById('EE').style.display = 'none';}
+
+	if (ltr) { patt=ltr; }
+	else { patt = document.getElementById('TxtLtr').value.toUpperCase(); }
+	document.getElementById('FormLTR').reset();
+	var pattAt = patt.charCodeAt();
+	if(pattAt=="59"){ /* Easter Egg Detected */
+	document.getElementById('EE').innerHTML = "\""+WRD01+"\"";
+	document.getElementById('EE').style.display = 'block';
+	}
+	else {
+	COUNT+=1;
+	var x=0;
+	document.getElementById('h99').innerHTML = "";
+	var PATT = new RegExp(patt, "g");
+	var N = WRD01.length;
+	ARWRD01 = WRD01.split(""); //TRANFORMA EM ARRAY
+
+	WRD02 = document.getElementById("h00").innerHTML;
+	ARWRD02 = WRD02.split(""); //TRANFORMA EM ARRAY
+	WRD03 = document.getElementById("h00").innerHTML; //W2 ANTIGA!
+	document.getElementById("h00").innerHTML = "" ; // LIMPA h00
+
+	//BUSCA A LETRA NA PALAVRA
+	for (;x<N;x++) {
+		if (ARWRD02[x] == "_" && ARWRD01[x] == patt) {ARWRD02[x]=patt;}
+		document.getElementById('h99').innerHTML += ARWRD02[x]+" "; // MOSTRA OS ACERTOS
+		document.getElementById("h00").innerHTML += ARWRD02[x];
+		}
+	document.getElementById('Ltr').innerHTML += patt+" "; //MOSTRA LETRA
+	WRD02 = document.getElementById("h00").innerHTML; //W2 NOVA!!!
+
+	/* A CADA ERRO, MOSTRA 03 PARTES DO CORPO */
+	if (WRD02 == WRD03) { ERROU+=1;toca("ERRO");
+		for (var z=0;z<=2;z++) {
+		Y[ERR].style.display = "block";
+			if (ERR>=20) { STT=1; var CUMPMT="ENFORCADO!"; }
+		ERR+=1;
+		}
+	}
+	/* FINALIZA & ESTATISTICAS: */
+	else if (WRD01 == WRD02) { STT=1; var CUMPMT="PARABÉNS!"; toca("ACERTO");}
+	document.getElementById("h02").innerHTML = "Resta(m) "+(7-ERROU)+"<br>"+COUNT+"º JOGADA<br>"+ERROU+"º ERRO";
+
+	if(STT==1) {
+	document.getElementById("h01").style.display = "block";
+	document.getElementById("h01").innerHTML = CUMPMT;
+	document.getElementById("BTN00").style.display = "block";
+	document.getElementById("BTN04").textContent = "Ver "+TPWRD;
+	document.getElementById('DIV01').style.display = "none";
+	document.getElementById("BTN03").style.display = "none";
+	document.getElementById('BTN01').style.display = "none";
+	document.getElementById('h99').innerHTML = WRD01;
+
+	WRDSA=WRD01;
+	var CAC="ÁÃÂÉÊÍÓÚÇ", SAC="AAAEEIOUC";
+	for (var n=0;n<CAC.length;n++) {
+	var ccac = CAC.charAt(n);
+	var csac = SAC.charAt(n);
+	WRDSA = WRDSA.replace(ccac, csac); }
+
+		if(TPWRD=="Fruta") {
+		LINK="https://www.google.com.br/search?q="+WRD01
+		document.getElementById("BTN04").style.display = "block";}
+
+		else if (TPWRD=="Time") {
+		var abc = "abcdefghijklmnopqrstuvwxyz";
+		var LTR = WRDSA.charAt(0).toLowerCase();
+		if(LTR!="a"){LTR = abc.charAt(abc.search(LTR)-1);}
+		LINK="http://globoesporte.globo.com/futebol/times/#"+LTR;
+		document.getElementById("BTN04").style.display = "block";}
+	}
+}
+}
+function ClearBTN() {
+	document.getElementById("BTN04").style.display = "none";
+}
+
+function DICA() {
+	var tam = WRD01.length;
+	for (var Y=0;Y<WRD01.length;Y++) {
+	var cc01 = WRD01.charCodeAt(Y);
+	var cc02 = WRD02.charCodeAt(Y);
+		if(cc02 == 95) { var ltr = WRD01.charAt(Y);
+		TESTA_LETRA(WRD01.charAt(Y));
+		break;
+		}
+	}
+	document.getElementById("BTN03").style.display = "none";
+}
+
+function WORD_A(Y) {
+var WORDS = ["ACALENTAMO", "AMARRA", "ATIRAVA", "ARRENDAREI", "APOTEÓTICA", "ASSAVA", "ANTEVEJAM", "ASSEGURARA", "APROVARÃO", "AMENIZEMO", "APARENTOU", "AFLITO", "AMOLECENDO", "AGIOTAGENS", "AJEITASTE", "ACARINHAMO", "ARROXEEMOS", "ASSOCIADOS", "ALOQUEMOS", "AUTORIZARA", "ABALIZARIA", "AEROVIÁRIO", "ALOCAMO", "ADVOGUEM", "ABRIGASSEM", "AUFERÍREIS", "AUSPÍCIOS", "ARARDES", "ADIEIS", "ATURDIRIA", "AUREOLASTE", "ALGURES", "ACOMETER", "ALGÉBRICOS", "ARREMETE", "AGRADARAM", "AVOLUMADOS", "ANTROPÓIDE", "ALONGAS", "ADIADA", "APERREARES", "ARBITRADO", "AGILIZEM", "ATERRISSO", "ABATERMOS", "APAVORARÁS", "ABAFARAS", "ABRIGASTES", "ALEIJAMO", "ACENTUARÁ", "APODERARES", "AMACIARMO", "AMEAÇADOS", "AGRAVEIS", "ASSECLA", "ANGARIANDO", "ALUDIAS", "AVERMELHES", "ACEITAS", "ANSIAR", "AUGUSTO", "ALOURA", "ASSÍDUOS", "ASSALTAVAM", "ADIVINHÕES", "ABATIDA", "ATRITA", "AFLUAIS", "ACESSADAS", "ANIMALIZOU", "ACERCARAS", "ABEIRARMOS", "ALDEÍDO", "APITÁRAMOS", "AGULHASTES", "ACALMAREI", "ARFADO", "AFANARMOS", "AVISAS", "ATENUAÇÕES", "ATEÁRAMOS", "ATIVAREIS", "AÇOITAIS", "AJUSTASSES", "ABAFAREI", "ALIVIASTES", "AMARGARIA", "AFEIÇOAVA", "ABRASARA", "ACENTUARAM", "ABJUREI", "ADORNARAM", "ADICIONEIS", "AMIMARMO", "ABUSAR", "ALTEAREMOS", "ADELGAÇAS", "ALOURARÃO", "ABENÇOARÁ", "AFOBASTES", "ABRANDAVA", "APOSSARMOS", "ACERTAVA", "ADORAMO", "AFOFÁVAMOS", "ALCANÇAS", "ATRAPALHE", "ASSEDIE", "ACOBARDADO", "ARROTEADAS", "ALARMARÁ", "ANUIRÁ", "AFASTAI", "ARRENDADA", "ABOLIREM", "ARROMBAREI", "AMEAÇARÁ", "APLAINO", "ANACRÔNICA", "ANGARIARÃO"];
+return WORDS[Y];
+}
+
+function WORD_B(Y) {
+var WORDS = ["BOLADAS", "BORBOTÃO", "BIRMANESA", "BORDEJAIS", "BANDEAVAS", "BANALIZADA", "BROCHÁ", "BAILAI", "BATALHARIA", "BANCASSE", "BEIJOQUEI", "BURLAREMO", "BENDIZIA", "BEATIFICAS", "BAMBOLEARA", "BOTARMO", "BICHANO", "BOBEARÍEIS", "BALOUÇADOS", "BABUÍNOS", "BORRARÍEIS", "BARRINHA", "BOBEIA", "BULIÇOSO", "BRAMÁREIS", "BOXEEMOS", "BIPARTIAS", "BAQUEASTE", "BRACEJARÃO", "BULÍRAMOS", "BAFEJAMOS", "BASSANO", "BANDEAIS", "BRIGUE", "BORDEJADOS", "BEIJOQUES", "BAGUNÇADO", "BURLARA", "BAFEJAI", "BRADAVAM", "BESUNTAR", "BAFEJAVAM", "BISPADO", "BANDEIRA", "BEIJEMO", "BRILHARÃO", "BOICOTARES", "BIFURCASSE", "BRUSCOS", "BORRADO", "BERMUDENSE", "BOMBEAR", "BROTARAS", "BOIADEIROS", "BARRIGUDOS", "BENDIGAMOS", "BRIGONA", "BAINHAS", "BANALIZAM", "BARREIRA", "BORDEJARAS", "BARBUDANOS", "BALÕES", "BRACEJOU", "BAIXEMO", "BENZERIAM", "BLASFEMEIS", "BARRAR", "BORDAMO", "BAIXELA", "BORRARÃO", "BARBUDAS", "BELISCAMOS", "BORDEL", "BOSQUEJES", "BARBEARMO", "BAFEJADA", "BIVAQUE", "BILHÕES", "BAIRRISTA", "BOTIJÕES", "BERRARÁ", "BROTÁRAMOS", "BLOQUEIAS", "BEIÇUDO", "BEIJOQUEIS", "BAUXITA", "BALDIOS", "BALIZARÁ", "BABOSA", "BRACEJAREM", "BANIRÃO", "BETUMINOSO", "BRACEJAS", "BOVINOS", "BROCARIAS", "BESTEIROS", "BAILAS", "BROCHOU", "BURACO", "BEBIAM", "BATEDEIRA", "BOLORENTO", "BOTARMOS", "BANDEAMOS", "BEATINHOS", "BAUNILHA", "BARREIRO", "BAJULASSES", "BLEFÁSSEIS", "BAILARÁ", "BIOCIÊNCIA", "BROCHAVAM", "BRINCOU", "BERRAMOS", "BORDADURAS", "BERRARDES", "BATIZARMO", "BARATEIRO", "BEBERÃO"];
+return WORDS[Y];
+}
+
+function WORD_C(Y) {
+var WORDS = ["CONSERVEMO", "CONJURADOS", "CLAMAVAS", "CUPIDOS", "COAXADA", "CUMULEI", "CHULEIAM", "CULPASSEM", "CONOSCO", "COROEM", "CHULEARA", "CANCELAI", "CHIADOS", "CONFIARIAS", "COROARIA", "CULMINAVAS", "CONTESTAS", "CARIMBAI", "CRIVAVA", "CHUCROS", "COTARA", "CUNHÁREIS", "CAMPEARIA", "CATURAÍ", "CÂMBIOS", "COMOVÍEIS", "CLAUDICAI", "CONSTANDO", "CADUCARIA", "CULMINADOS", "CRAVEJO", "CAMINHANTE", "CONCEDAMOS", "CAREÇAIS", "CHACINA", "CHORASSEM", "CAMBALEIE", "COLORIRDES", "COMUNGADOS", "CACHIMBARÁ", "CONECTIVA", "CITOPLASMA", "CONTATEIS", "CRITICAMOS", "CIANÓTICA", "CALARIAM", "CHAMES", "COMBÓIAM", "COZINHARIA", "CRIVOU", "COMIDINHAS", "CONSTRITOS", "CERÂMICAS", "CRISMARES", "CALHAVA", "CUSTEAMO", "COMBALIRES", "CAPELA", "CAVALINHOS", "CHOCAIS", "COMENTEMOS", "CANSAÇOS", "CARECEMO", "CONTRITA", "CINGIREIS", "CHUTAREMOS", "CRUELMENTE", "COMPETENTE", "CRUZAS", "CROMASTES", "CORTINAS", "CERNIRIAM", "CHOVESSEM", "CASAIS", "CARECIAM", "CONVIERA", "CAPITULEM", "CRISMARMOS", "CAIAÇÃO", "COBREIS", "CHOCHO", "COZIAS", "CANTILENAS", "COROAREI", "CACHEEI", "COLORIRMOS", "CASADAS", "CUTUCADAS", "COPEIRO", "CIVILIZES", "CARBURARES", "COMUTAVAM", "COLOCA", "CRISMAREI", "CARECIA", "CASTIGARMO", "CONTUNDAM", "CHIADAS", "CALUNIAMO", "COEXISTIA", "CARBURARA", "CUIDÁRAMOS", "CHEIRAREM", "CRÉDULAS", "CONVIVERAM", "CEFÁLICAS", "CISMAREMO", "CUNHASSEM", "CONSERVADA", "COOPERAMO", "CONFIRMO", "CULTIVAVAS", "CONCHAS", "COBRARIA", "CURTAS", "CISCARES", "CONFISQUEI", "CALIBRARÃO", "CEARIAS", "COTOVIAS"];
+return WORDS[Y];
+}
+
+function WORD_D(Y) {
+var WORDS = ["DESABROCHO", "DESOCUPEM", "DEDICAM", "DEMOLIRMOS", "DIFUNDAM", "DESAFIE", "DESFIARA", "DEMORAVAS", "DEIXARES", "DESENHADOS", "DIFAMEMOS", "DISCAGEM", "DÍZIMAS", "DESCRUZADA", "DISPUSEREM", "DESLIGAS", "DIALOGARMO", "DEFECTIVOS", "DESABAFAMO", "DOBREMO", "DIGNAVA", "DETERMINAM", "DECLAMARMO", "DELEGARIAM", "DERRAPAI", "DESATAR", "DESABAFAI", "DIZIMAVAS", "DICÇÕES", "DESGARREM", "DEITAVAM", "DESCUIDARÁ", "DENEGARA", "DENOMINAMO", "DERRAPARIA", "DERRETES", "DEPOSIÇÕES", "DESCULPAM", "DITADOR", "DEBELEMO", "DESTINARA", "DEGOLARAM", "DERRUBA", "DENUDAÇÕES", "DESOVANDO", "DEPRAVAIS", "DESTITUA", "DESÁGÜE", "DISTRAIO", "DEBUTAVAS", "DEPENAM", "DEDUTIVAS", "DENOMINARA", "DEMOLIDOS", "DECEPARIAM", "DESVALIAM", "DEIFICAI", "DESTRONCAR", "DISTADA", "DECORASTES", "DESFIÁREIS", "DISSIPEIS", "DELIRÁ", "DIRIMEM", "DESTAS", "DIFAMARÃO", "DESENHÁ", "DETURPAMO", "DEFECAMOS", "DIVAGAVA", "DESLANCHAS", "DEBILITEIS", "DECIDIR", "DESFERISTE", "DOUTORADO", "DECLARADA", "DESCAMBEIS", "DEDICAÇÕES", "DEPAUPERÁ", "DEDILHARÁ", "DOAREIS", "DÓRICAS", "DEDURARIAM", "DEPOREI", "DEFASASTES", "DEPRECIADO", "DESATIVAM", "DENSIFICÁ", "DESPOJARAS", "DECORRÍEIS", "DIRIMIRMO", "DENOMINARÁ", "DECRETAMOS", "DISSIPARAS", "DOMÉSTICOS", "DELINEASTE", "DERRAMARÃO", "DESFECHAS", "DEIXÁREIS", "DENOMINAS", "DESVALENDO", "DISFARÇAI", "DENÁRIOS", "DESCALVADO", "DEGOLO", "DESAFORADA", "DENODO", "DESENROLEI", "DICOTOMIA", "DESFILA", "DESLIZADOS", "DIVERGISSE", "DISSOCIAMO", "DEFUMEI", "DETECTADAS", "DESVALES", "DISTINÇÃO", "DESMEMBRE", "DELATA", "DESATAM"];
+return WORDS[Y];
+}
+
+function WORD_E(Y) {
+var WORDS = ["EXPIAREMOS", "EQUIVOCAR", "ENTRELAÇO", "EMPALEMO", "EDUCANDAS", "EXAGEREMO", "ESTACARIAS", "EDITORAIS", "EXPEDIRÁ", "EMPREENDER", "EMBASADAS", "ENGASGOU", "EXPELÍEIS", "ENROLAVA", "EMBRENHADO", "ESPARGIRAM", "ENLATEM", "EXAURIRA", "EMPALÁREIS", "EVEREST", "ESMORECEIS", "ENUMEREI", "ENFRONHARA", "EXPORTAMO", "ERGUEREMOS", "ENLAMEEIS", "ENTROSAIS", "ENEVOEMOS", "ENCOBRIMOS", "ESCUSAREI", "EDUCANDO", "ESTRAGAR", "ELEVARES", "EMANAÇÕES", "ENSIMESME", "ENTRELAÇÁ", "ESMURRAVA", "EMERGÊNCIA", "ESPALHAM", "EXALTARA", "EMBOLAÇÕES", "ESFREGAI", "ESCASSEADA", "EMBROMAI", "EMENDAR", "ESVAECERAS", "ENFRONHADA", "ESTREARIAM", "ESTREANDO", "ESPOLIEM", "ENCABEÇAM", "EXIMAMO", "EQUILIBREI", "ENRUGAVAM", "ESVAZIASSE", "ESTACIONOU", "ECOARÁS", "ENJOAS", "ENCARREGAI", "ESVANECE", "ELEGANTES", "ENTRETERES", "ESVAECER", "ELEVARA", "EXPEDIRIAM", "ESFOLASSE", "ESPORO", "EXIBEM", "ESCAPAVAS", "ENCURRALÁ", "ENTALADAS", "ERODIREMOS", "EMBOLSAVAS", "EQÜIDISTAM", "ESTATIZAR", "EXTERNO", "ERIÇÁREIS", "ESPACE", "EXTRAI", "ELOGIARDES", "EXALARÃO", "ENTREVEMO", "ENJEITADO", "ESPICHE", "ENCRAVADA", "EXPORTES", "EXPIRAMOS", "ENFOCARAS", "ENGULÍREIS", "EXPUNHAM", "EMPALHOU", "ESTRILARIA", "ESTIRASTE", "ENCRESPAR", "EMPUNHAS", "ENCORPÁ", "ENCOBRIRIA", "ESMERAMOS", "ESTOFARES", "ESGANAIS", "ENOJARIA", "EXCITE", "ENCIMAS", "EXPIAREM", "EMENDES", "ENTREGARÁ", "ESPERASTE", "ENVELHECER", "ESFÉRICOS", "EVITARAM", "ESTIMAI", "EXISTIRIA", "EMERGIRIAM", "EMBROMARAS", "ENFRENTOU", "ENSIMESMEI", "EBÚRNEOS", "ESCRUTINEM", "EJETAREMO", "ENCARÁVEIS"];
+return WORDS[Y];
+}
+
+function WORD_F(Y) {
+var WORDS = ["FRESAMOS", "FINCARMO", "FURAREIS", "FERRASSEM", "FOLHEARMO", "FORRASSEM", "FATIEI", "FICHASSE", "FORMÁVAMOS", "FUXICAS", "FERIRA", "FEDEREM", "FLAGRARMO", "FAREJÁREIS", "FOFOCO", "FÍGADOS", "FERMENTO", "FINGIMENTO", "FUXICARES", "FINALIZADA", "FINCÁREIS", "FUNDEARA", "FRANZIRIA", "FORMAL", "FERTILIZES", "FALHAVAM", "FULGURAM", "FLAUTEAVAS", "FRUIREI", "FARFALHARÁ", "FIAÇÃO", "FRETEI", "FORRAGEIO", "FORREMO", "FLAUTEAVAM", "FINGIS", "FILIAREMO", "FULGIMO", "FRAQUEJAR", "FOSSILIZÁ", "FEDÊSSEMOS", "FESTEJAIS", "FINGISSES", "FEDERES", "FALECERDES", "FLUTUAVAS", "FORNECERES", "FAVORITAS", "FECHARIA", "FARRAPOS", "FORMATANDO", "FINDADA", "FUNDEARIA", "FORNIQUE", "FRAQUEJADO", "FORÇAM", "FRANQUEAVA", "FRANZIRA", "FINTARIAM", "FISGAMO", "FUNGASSE", "FRISEI", "FOMENTADO", "FOGAREIROS", "FAREJASSES", "FLORILÉGIO", "FAREJOU", "FALTOU", "FESTEJARÃO", "FOTOLITO", "FLAMENGOS", "FALSIFICOU", "FRESARA", "FRISOS", "FATÍDICO", "FATIEIS", "FUNDEEIS", "FOGUETÓRIO", "FANHOSA", "FRANQUEIE", "FRESADAS", "FLAUTEARÁS", "FENÓTIPOS", "FOQUEI", "FLUÍSSEM", "FEIXES", "FRESEIS", "FALECEM", "FLAMEJARIA", "FRIJAMOS", "FILIAREM", "FUSTIGAREI", "FERRAMO", "FRACIONAMO", "FINCARIAM", "FOFOCASTES", "FAREJASTE", "FIXADORA", "FUNDEARES", "FRIGISSE", "FLAUTEARIA", "FALSEAREM", "FRUIRÁS", "FRANCÊS", "FOCASSEM", "FARREAVAS", "FUXIQUEI", "FULMINOU", "FREARDES", "FRUSTRARÃO", "FOCARMO", "FAISQUEM", "FELICITAIS", "FAQUIRES", "FIRMEM", "FERISTE", "FAREJASTES", "FEDEREMOS", "FUNERÁRIOS", "FRESCAS"];
+return WORDS[Y];
+}
+
+function WORD_G(Y) {
+var WORDS = ["GABADO", "GRILAREM", "GINGAREM", "GUIADO", "GRANJEAMO", "GRATUITO", "GAIATO", "GANHEIS", "GLOSARÍEIS", "GOSTÁVAMOS", "GUABIJU", "GOTEJAREMO", "GALOPEM", "GEODÉSICAS", "GRILARÍEIS", "GORASSE", "GORILA", "GAULÊS", "GRELHO", "GRAVITARAS", "GALOPANTES", "GOLPEASSES", "GERVÁSIO", "GRULHEMOS", "GIRINO", "GRACEJEIS", "GLOSASSE", "GENEROSOS", "GRAFÁRAMOS", "GALOPARAS", "GROTESCA", "GASTES", "GRANDÃO", "GASTARES", "GELATINOSO", "GEÁVAMOS", "GRÂNULO", "GUARDADA", "GIRARÁ", "GERENCIO", "GRADUANDOS", "GARGAREJEI", "GOZAREM", "GEAREM", "GABADA", "GRASNARAM", "GELASSES", "GUIARÍAMOS", "GRULHOU", "GRACEJEMOS", "GERASSEM", "GROSSOS", "GALPÕES", "GARIMPAMOS", "GINGARDES", "GEARÃO", "GABEIS", "GAGUEJAI", "GANDAIADA", "GANIDAS", "GEREMO", "GAFIEIRA", "GRISALHO", "GUARDAI", "GINASIAIS", "GANÍREIS", "GRUDÁSSEIS", "GRIFASSES", "GROSSOS", "GOZAREMO", "GERENCIARA", "GINGAVAM", "GRULHARA", "GRAVAÇÃO", "GERMINAVA", "GARANTIU", "GOVERNANDO", "GUERREOU", "GUARDIÃES", "GLOSAREM", "GANHARMOS", "GEMELARES", "GULOSO", "GARIMPADA", "GELANDO", "GRAFAVAM", "GORARÁ", "GIRATÓRIOS", "GABEMOS", "GARFADO", "GESTOR", "GOZANDO", "GRASNAVAS", "GUARDARÁ", "GRIFASSE", "GOLEARÁ", "GERIRÁS", "GINGAI", "GRISALHA", "GRULHADOS", "GERMINARAS", "GERARES", "GRITAREIS", "GORASTE", "GRÁVIDAS", "GRACEJEMO", "GABARITAI", "GELARÁ", "GERIDA", "GINASIAL", "GALOPADOS", "GLORIFICAR", "GOSTARMOS", "GOTEJARDES", "GELARÍAMOS", "GARBOS", "GAÚCHOS", "GEMERIAM", "GRANJEARMO", "GAGUEJARMO"];
+return WORDS[Y];
+}
+
+function WORD_H(Y) {
+var WORDS = ["HEGEMONIAS", "HISTORIÁ", "HERÉTICA", "HASTEARÁS", "HEMOSTASIA", "HABITE", "HIBERNES", "HÍBRIDOS", "HEMORRAGIA", "HESITES", "HERDEIRAS", "HESITASTE", "HARMONIZA", "HASTEARMO", "HAURISSES", "HESITAM", "HASTEADAS", "HISTORIEIS", "HABILMENTE", "HISTÉRICO", "HORDAS", "HEBRAÍSTAS", "HEPTÁGONOS", "HERDAI", "HESITARIA", "HABITARÃO", "HUMANIZES", "HOSPEDAVAM", "HONRAVA", "HORRORIZE", "HIBERNEMOS", "HEBRAIZEI", "HONRARA", "HOMEOPATIA", "HAGIOLOGIA", "HEDIONDA", "HOMENAGEÁ", "HIPISMO", "HEBRAÍSMO", "HELSÍNQUIA", "HORRIPILEM", "HIDROSFERA", "HIPÉRBOLE", "HELIER", "HORTALIÇAS", "HIDRATADA", "HOSPEDARES", "HASTEAVA", "HERDASSEM", "HIBERNARÁ", "HAURIRAS", "HERDAVA", "HOMENAGEEI", "HIPNOTIZEM", "HERDAS", "HAVEMOS", "HORMÔNIOS", "HOSPEDA", "HERMÉTICO", "HESITAS", "HASTEEI", "HOSPEDASTE", "HEBRAIZEIS", "HOSPEDARAS", "HORRÍVEIS", "HOMEOMORFO", "HONRASTE", "HONREIS", "HONRES", "HERTZIANOS", "HEPÁTICOS", "HUMILHARES", "HEMÁCIA", "HEMOFILIA", "HECTARES", "HERDARÁS", "HIBERNAIS", "HERCÚLEOS", "HOMÓLOGO", "HAVÍAMOS", "HONRAREM", "HESITAREM", "HIPOREXIAS", "HIBERNASTE", "HEROÍSMOS", "HORRENDOS", "HIPOTECADA", "HOMOGÊNEAS", "HAVERDES", "HIBRIDIZA", "HAVAIANO", "HUMANIZARA", "HERESIARCA", "HÁBITO", "HONORÍFICO", "HESITAREIS", "HIBERNEM", "HIDRÁULICO", "HUMILHÁ", "HONRARÁ", "HOLANDESA", "HÓSPEDE", "HOMÓLOGOS", "HIPÓCRITAS", "HEDONISTAS", "HESITARÃO", "HIBERNARAS", "HISTOGRAMA", "HUMILHEM", "HAVERÁ", "HEBRAIZAMO", "HUMANIZA", "HIPOTECAS", "HORRORIZÁ", "HEBREU", "HORTÊNSIAS", "HABITUARAM", "HONORÁRIOS", "HAURÍAMOS", "HOSPEDARMO"];
+return WORDS[Y];
+}
+
+function WORD_I(Y) {
+var WORDS = ["INVESTIGAS", "INTENTEIS", "ITUPORANGA", "INDIZÍVEL", "IRRITAS", "INTENTEI", "IONIZEIS", "INSTIGADAS", "INQUERÍEIS", "INDEXARES", "IMITAS", "INFUNDIS", "IMPRECAVAS", "INCIDIRÃO", "INTERNAMOS", "INFLAMÁ", "IMPLANTE", "INGRESSE", "IMPUGNARÃO", "INSCREVI", "IMAGINAVA", "INUNDARIAM", "IMPELIRMO", "INIMIZADE", "INEBRIARIA", "INDIGESTA", "INCLINE", "ISOTÔNICA", "ILUMINEM", "INGERIREMO", "IRRIGUES", "INFILTRADO", "IMPINGE", "INSOLAÇÃO", "INSTITUAS", "INTERCALEI", "ISLANDESA", "IMANTAIS", "INCERTOS", "IMPORTE", "IRROMPAMOS", "INFORMADA", "IMBUIA", "INCITO", "INQUERIMOS", "IMERGIRIAM", "INDISPORÁ", "INSERIREMO", "INFLARÃO", "IMPINGIAM", "IRONIZEI", "INEBRIARAM", "ICTERÍCIAS", "IRANIANO", "INSTARA", "IMPREGNO", "IMPLICARMO", "INCUBAÇÃO", "INSPIRARIA", "IMPULSÃO", "INSULARA", "INDICIEM", "IMIGRARIAM", "INFERISSES", "INSUFLEI", "INFILTREMO", "IMPUTARIAM", "IMIRJA", "INDUZE", "INTEGRAI", "ISENTAVAS", "INCUTIRÁS", "INFORMARAS", "INFUNDIRES", "INDECISOS", "INTRIGAS", "IRANDUBA", "INSISTIRMO", "INSTÁVEIS", "INVESTIS", "IMPUGNADA", "ISENTÁVEIS", "IMOLASSEM", "IMERGE", "IMPRIME", "INCIDIDOS", "INJUNÇÃO", "INFERIRÁ", "INTERDITAS", "INVISTAIS", "IRRITAVA", "INVENTÁRIO", "INCULCOU", "INSTARÁS", "INOVARÍEIS", "INANIMADAS", "ISENTEI", "INDUZIMOS", "ILEGÍTIMOS", "INSTRUAMOS", "INSTRUÍDA", "IRMANASSES", "INFUNDIA", "IMAGINEMO", "ITAPEMIRIM", "IGNARO", "INVISTO", "IPANEMA", "INDEFERIAS", "IMPLORÁ", "IMPOMOS", "INFINITIVO", "INOVAREMOS", "INCULQUEM", "INCENTIVOU", "IGUARACI", "IMPONHAM", "INFECTARA", "IGARAPÉ", "INOCULADA"];
+return WORDS[Y];
+}
+
+function WORD_J(Y) {
+var WORDS = ["JAPONESA", "JEJUARIAM", "JUDAICA", "JORRADA", "JESUITISMO", "JANTAMOS", "JAZESSEM", "JANTAREIS", "JUDIARAS", "JUBILARAS", "JORRAMO", "JURURU", "JOGADOS", "JAGUARUANA", "JUDAIZAI", "JARDAS", "JUNTAVAM", "JUNTADA", "JULGADOR", "JAGUARARI", "JOEIRARIAM", "JUSTIFICAM", "JUDAIZEMO", "JAGUNÇOS", "JULGAMO", "JOGAVAM", "JOEIREMO", "JUBILARAM", "JUDAIZEIS", "JULGARMO", "JULGASSEM", "JURÍDICA", "JUDAIZARES", "JUMENTAS", "JANDAIA", "JOEIRAREMO", "JORRAREIS", "JORNALISTA", "JANELA", "JUBILOSOS", "JEJUAI", "JUSTIÇA", "JAZÊSSEIS", "JORNALISMO", "JULGÁRAMOS", "JANTARDES", "JUDIARAM", "JABUTIS", "JUREMO", "JURÁSSEIS", "JUNTARÍEIS", "JARDINS", "JOGARÍEIS", "JUDIARÃO", "JULGARIAM", "JOGARAS", "JURARIAS", "JESUÍTICOS", "JOEIREI", "JUNTARAM", "JALECOS", "JULGARIAS", "JAZEIS", "JOGAREM", "JUDAÍNA", "JUGULAR", "JULGASSES", "JANOTA", "JEJUARMO", "JUQUITIBA", "JAMPRUCA", "JUREIS", "JULGAM", "JUNÇÕES", "JUSTAS", "JABOTICABA", "JESUÍTICO", "JULGAS", "JUDIES", "JAZEREMO", "JEJUAVA", "JAUPACI", "JUDAIZOU", "JOÃOZINHO", "JUBILOSAS", "JURARAM", "JORRAREI", "JUDIÁVEIS", "JORRARÍEIS", "JAPONESAS", "JUDAIZARAS", "JANTARÍEIS", "JORRARÁS", "JUBILASSEM", "JUDIARMOS", "JUREMA", "JULGASSE", "JUBILAVAS", "JOGUEI", "JAGUARIÚNA", "JAPIRA", "JOGATINA", "JUDIADA", "JULGANDO", "JURARIA", "JAZIGO", "JOGATINAS", "JURAVA", "JAGUARÃO", "JANTANDO", "JOEIRAMO", "JUDAIZAVAM", "JAICÓS", "JAZERÁ", "JACUTINGA", "JUDAIZAR", "JURADA", "JIBÓIAS", "JEJUÁSSEIS", "JUNTAREIS"];
+return WORDS[Y];
+}
+
+function WORD_L(Y) {
+var WORDS = ["LIMALHAS", "LEGISLEM", "LUTEMO", "LINCHAMOS", "LÍQUIDAS", "LAMBUZE", "LIMPAM", "LABUTÁVEIS", "LAMBUZASSE", "LISBOA", "LENHADOR", "LASTREEMOS", "LOCALMENTE", "LIXAREI", "LANCHA", "LAMPEJAS", "LABORIOSAS", "LAUREASSEM", "LACERADAS", "LAQUEAÇÃO", "LAMENTARAS", "LEVANTASTE", "LUZIRAM", "LITIGARAM", "LÚDICA", "LAMINAREMO", "LISTARÃO", "LAMBUZASTE", "LINCHA", "LIMAREI", "LITIGASSES", "LUZÍREIS", "LUSTRAM", "LAMBUZAVA", "LOGRAI", "LISANDRO", "LISTASTES", "LAGOSTA", "LIMPEZA", "LACRAIA", "LACRADA", "LIQUIDES", "LATIAS", "LARGAVAS", "LECIONÁ", "LÍBANO", "LIVRAREMO", "LAMBUZARAS", "LOGRARES", "LIDARDES", "LERIAM", "LEGADOS", "LOTADAS", "LASTIMADOS", "LOGRARAM", "LAUDOS", "LUCRADA", "LUCRADOS", "LUCRARÍEIS", "LOUVÁVEIS", "LEVARIAS", "LASQUINHAS", "LEVARAS", "LASCOU", "LACEMOS", "LABORANDO", "LAMPEJES", "LEGISLARÃO", "LÓGICOS", "LEITOSO", "LICITÁ", "LEILOANDO", "LICITARES", "LINOTIPOS", "LAUREÁVEIS", "LIGAMOS", "LÍRICA", "LÉSBICO", "LIBERTARES", "LÊRAMOS", "LIMPÁSSEIS", "LAGOAS", "LEMBRADORA", "LIQUIDE", "LOTAMOS", "LAVRADORES", "LACRAREMO", "LIMPADOR", "LEONESAS", "LUTADORES", "LUNETA", "LABAREDA", "LUTERANAS", "LAMBUZA", "LEVANTARAM", "LEGARAS", "LEGISTAS", "LABUTARIAS", "LÍMPIDOS", "LACUNA", "LATIDAS", "LIQÜEFARÁ", "LOCARÁ", "LIBERARES", "LADÁRIO", "LADRILHEI", "LICITAREIS", "LARGUEMOS", "LOGRARMOS", "LIBERTAS", "LAUREARES", "LARGANDO", "LASTREAREM", "LIXEIRO", "LOGRADORES", "LAGARES", "LEMBRADOS", "LICITES", "LIMAREIS", "LEVANTAI"];
+return WORDS[Y];
+}
+
+function WORD_M(Y) {
+var WORDS = ["METERÍAMOS", "MURMURASSE", "MALOGRE", "MULTARES", "MANEARÁS", "MORRERIAS", "MOLDASSE", "MAQUINA", "MATUTE", "MIGUELINHO", "MAGOANDO", "MINOREMO", "MANGABEIRA", "MOLHAS", "MOTORA", "MONÓTONA", "MAQUILARA", "MAGNÉTICO", "MICROFONIA", "MAQUIAVAM", "MAQUILAREM", "MATURAREM", "MADURADAS", "MEDITARÁ", "MATASTES", "MATURAVA", "MONRÓVIA", "MEDRÁVAMOS", "MALHADOR", "MONOPOLIZÁ", "MOTORIZADA", "MEXICANAS", "MOTIVAREM", "MANDÁVAMOS", "MANCHAR", "MENEARAM", "MODERAM", "MARCHAS", "MALÉFICA", "MOTIVARAM", "MONTASSE", "MATRICULEI", "MALOGRARÃO", "MAQUIAIS", "MODERAS", "MARCARIA", "MUTAÇÃO", "MEDRAVAM", "MOERMOS", "MAMORÉ", "MEANDROS", "MENSUREMO", "MOLÉSTIAS", "MALÁVI", "MELANINA", "MAGROS", "MELARA", "MANCHÁVEIS", "MAXIMAL", "MARMOTA", "MUNÍAMOS", "MIGRARIAS", "MOSCAVAS", "MENEÁVEIS", "MENEIA", "MADRUGAMO", "MODERNISMO", "MODERNAS", "MALDIVAS", "MELODRAMAS", "MANIFESTA", "MODIFICAM", "MALBARATAR", "MALÉVOLA", "MONITORAR", "MORDAS", "MIGRARAM", "MESCLAMO", "MAÇÔNICA", "MOGEIRO", "MENTALIZA", "MERENDAIS", "METÁSTASES", "MAMARÃO", "MEDIAVAM", "MODELÁ", "MORÁSSEMOS", "MARITUBA", "MOTIVARMO", "MENSUREI", "MEIRELES", "MURCHAR", "MODERAVA", "MONTAS", "MANEIRASSE", "MARULHADA", "MASCARADA", "MARTELARA", "METICULOSO", "MANDASTE", "MANTÊM", "MUAMBEIROS", "MELHORANDO", "MATUROU", "MAQUINARES", "MODULARMOS", "MOVAIS", "MURMURAMO", "MATUTAS", "MITIGAMOS", "MACRÓFAGOS", "MOLESTARAM", "MAGRICELOS", "MARCAPASSO", "MANCHEI", "MEDIAREMO", "MERECENDO", "MEXERES", "MANOBROU", "MÁGICO"];
+return WORDS[Y];
+}
+
+function WORD_N(Y) {
+var WORDS = ["NECROSAS", "NIQUELARIA", "NUTRIU", "NADAREI", "NOVATO", "NOTÍVAGO", "NINGUÉM", "NAVEGAS", "NOIVAMO", "NADEMO", "NOTICIAR", "NENÉNS", "NORTEARÁ", "NÔMADES", "NUMÉRICAS", "NEFANDO", "NAMORARDES", "NUMERAREIS", "NIVELAR", "NOTAVAM", "NAVEGAREIS", "NECRÓTICA", "NEVADO", "NEGOCIANTE", "NOTASTE", "NAVEGARDES", "NARCOTIZAS", "NEGÁREIS", "NOMEARES", "NEGUEMOS", "NATIVA", "NADARMO", "NECROSARAM", "NOTARÍEIS", "NEGREIROS", "NARRADOR", "NESPEREIRA", "NEVADAS", "NAVEGAREM", "NARRAVAS", "NEBULOSOS", "NERVOSISMO", "NADÁVAMOS", "NICHOS", "NAUFRAGUEM", "NINAREIS", "NAMORAVA", "NARRÁVAMOS", "NIQUELAMO", "NERVOSAS", "NONATO", "NOVIDADE", "NORTEARIA", "NOMEARÁ", "NÓDULO", "NICARÁGUA", "NUBLADO", "NEVASSES", "NOVINHO", "NOUTROS", "NOVICIAR", "NAVALHINHA", "NOVAMENTE", "NOBRES", "NARRARIAM", "NIVELARIA", "NINARMO", "NIVELAS", "NIVELAVA", "NANARÁS", "NEGOCIASTE", "NANARAM", "NEVASCA", "NANARÍAMOS", "NADAREM", "NASCENTES", "NORTEARMO", "NAMORARÁ", "NATALÍCIOS", "NUBLADA", "NEGOCIÁ", "NAMORAREI", "NOVICIAM", "NAUSEANTES", "NEGADOS", "NOVATOS", "NHANDEARA", "NEPALESAS", "NOTICIAI", "NINARAM", "NOTIFICAM", "NEPOTISMOS", "NECROSAR", "NOSSAS", "NIVELASTES", "NAVEZINHAS", "NECESSITAI", "NOTICIAREM", "NANICO", "NIVELE", "NUDISMO", "NORMATIVA", "NEWTON", "NOMEADAS", "NEPALÊS", "NAZISMO", "NADADAS", "NEGROS", "NESSAS", "NEGARÍAMOS", "NEGREIRO", "NANARA", "NOIVÁREIS", "NEGOCIADOR", "NARREMOS", "NARRAS", "NOTURNA", "NOMEASTES", "NARCOTIZAI", "NOMEADO"];
+return WORDS[Y];
+}
+
+function WORD_O(Y) {
+var WORDS = ["ORIENTOU", "OBTURAM", "OPUSER", "OPORIA", "OBVIAIS", "OSCULARAM", "ORNARMOS", "OBSEQUIE", "OXIDAREIS", "OCULTAREIS", "OBSTINADO", "ONDEARÁ", "ONERARES", "ONDULARAS", "OCORREREMO", "ONEROU", "OTIMIZAREI", "OBSTINAMOS", "ORBITAL", "OCULTARIAS", "OFICIASSEM", "OSTENTEMOS", "OFUSQUES", "ORDENHARÁS", "OLHARIAS", "OPINAS", "ONEREI", "OTIMIZEMOS", "OBCEQUEMO", "ORIFÍCIOS", "OSCULÁ", "OBSTRINJA", "OCORRAS", "OFERECE", "ORELHÃO", "ORTOPNÉIAS", "OUTORGAR", "ORGANIZAM", "OUSÁRAMOS", "OPINARÁ", "OFUSQUEI", "OBVIARIAS", "ONDULEMOS", "OBCECARMOS", "OBSERVAI", "OBJETIVO", "OMITIRES", "ORIENTARES", "ORÇADA", "OCASIONE", "OBJETIVES", "ORIGINAIS", "OLHAREI", "OFERTADAS", "OCULTEMO", "ORNANDO", "OUSEIS", "OXALATO", "OLOROSOS", "OBEDECIDA", "OCORRENTE", "ORÇAIS", "OBSEDIAVAS", "OPINARÃO", "OCULTARAS", "OVAÇÃO", "ONDULARÁS", "OBSTINEM", "OBTIVESSE", "OBJETIVADA", "OCORRIDA", "OBJETIVARA", "OMITAS", "ORFANATO", "OFUSCAR", "OPTÁVAMOS", "ORNARIAS", "ORIGINÁRIA", "OBEDECEIS", "OBTURANDO", "OPORÃO", "OFICIEM", "OSCILANTES", "OXIDEM", "OBSTRINGIR", "OBSTRUIRÁ", "ONDEAMO", "OCASIÕES", "OFEGANDO", "OBSTRINGIS", "OUTORGUEM", "OLVIDAMO", "OPRIMIDO", "OPONDO", "OVACIONES", "OBSEDIEI", "ORDENARMOS", "OFUSCAREM", "OSCILARIAM", "ORAÇÕES", "OCORRESTE", "OSCILÁVEIS", "OLVIDÁREIS", "OCORRES", "OBJETAREM", "OFERENDA", "OCASIONEM", "OUSASSE", "OBCEQUES", "OSTENTANDO", "OVACIONAMO", "OSTENSIVA", "OPUSEREM", "OBJETARAS", "OFERECIAM", "OBLONGAS", "ORÇAREMOS", "OTIMIZÁ", "OTIMIZAI", "OBSTRINJAS"];
+return WORDS[Y];
+}
+
+function WORD_P(Y) {
+var WORDS = ["PARAVAS", "PATENTEAVA", "POSPOREI", "POLEMIZADO", "PROTELE", "PARTICIPAR", "PACTUEI", "PRENSADOS", "PROFIRAIS", "POUPÁVEIS", "PETISCARMO", "PREPARAR", "PULARMOS", "PERMITES", "PLATÔNICA", "PAÇOCA", "PROCURAM", "PROCRIARAM", "POPULOSOS", "PENHOREIS", "PARECÊREIS", "PARAOPEBA", "PEIDARIAS", "PENETRASTE", "PRÓSPERAS", "PECHINCHO", "POSSESSA", "PAIZINHO", "PENHORADOS", "PARTILHEI", "PINCELARÃO", "PROMETEMO", "PRIVATIZES", "PAGINOU", "PROFERIRIA", "PROVÍNCIAS", "PIPOCARAS", "PERDOARES", "PERCEBAMO", "PREFERIRA", "PSICÓLOGAS", "PICHOU", "PAIXÃO", "PREGÁRAMOS", "PINÇAREIS", "PROMANASSE", "PEIXES", "PREGUEAMOS", "PEDAÇOS", "PRIVATIZÁ", "PENÚLTIMAS", "PULAVAS", "PERDURAS", "PERCORRIAS", "POSTULARAM", "PRESTIGIAS", "PAGARAM", "PASMARMO", "POLITIZEM", "PILHARMOS", "PERSUASIVO", "PREGOEIRA", "PARÁVEIS", "PATINHADOS", "PRINCIPIAM", "POUPEIS", "PRATICAREM", "PLANTADA", "PROIBISTES", "PINCELEMOS", "PORTASTE", "PASTARÁS", "PORTAVAS", "PILHERIARÁ", "PATINÁVEIS", "POSIÇÕES", "PARADEIROS", "PASSEIEM", "PERCORRAIS", "PLASMASTE", "PAPUAS", "PREGUIÇARA", "PEREGRINAM", "PROSTRAR", "PEQUES", "PROVARÍEIS", "PAVOROSO", "POUSARMOS", "PUDERA", "PLASMEIS", "PROPUGNÁ", "PROTÉTICO", "PROVIESSEM", "PERFUMARIA", "POSSUIRIAS", "PROVIERES", "PASSEIAS", "PERSUADIS", "PROMANE", "PERSEVEREM", "PERIPÉCIAS", "PREPUSERES", "PESCAREMO", "PRENSARMO", "PALETA", "PALPAÇÃO", "PONDEREI", "POSADA", "POTIRAGUÁ", "POLEMIZARÁ", "PERMITINDO", "PALPITAREI", "PROLES", "PINGÁSSEIS", "PINGAREIS", "PEPINOS", "POLITIZEIS", "PUSESTE", "PEITEIS", "PACTUAREMO"];
+return WORDS[Y];
+}
+
+function WORD_Q(Y) {
+var WORDS = ["QUEDEM", "QUEIMAREI", "QUIMÉRICAS", "QUEIRAMO", "QUOCIENTES", "QUEBRÁ", "QUERELA", "QUEIRAMOS", "QUEIROZ", "QUENTINHA", "QUIMÉRICO", "QUITARIAM", "QUENTE", "QUERÍAMOS", "QUENTURA", "QUADRA", "QUEDARAS", "QUEDARÃO", "QUATIPURU", "QUEDAMOS", "QUEIXADA", "QUALIFICAM", "QUANTAS", "QUENTINHOS", "QUITARES", "QUEDÁVEIS", "QUADROS", "QUADROS", "QUEIXÁREIS", "QUEDARAM", "QUEIRAS", "QUESTIONEI", "QUEBROU", "QUEBRADO", "QUEREREMOS", "QUEDÁREIS", "QUEREMO", "QUEIXASTE", "QUEBRES", "QUITAS", "QUEBRE", "QUITARIA", "QUEBRAVAS", "QUIOSQUES", "QUEBRADAS", "QUIXABA", "QUEIXADO", "QUISEREM", "QUEBRAREI", "QUEBRARÁ", "QUEIMARMOS", "QUEIXARDES", "QUEREREIS", "QUEIMARIA", "QUARENTENA", "QUISERMO", "QUEBRASSEM", "QUESTIONEM", "QUARESMAS", "QUENIANAS", "QUADRICULO", "QUERERÃO", "QUÁDRICA", "QUEBRÁREIS", "QUERERIA", "QUEIXASSE", "QUEBRARÁS", "QUEPES", "QUARAÍ", "QUEDAVAS", "QUEIXAIS", "QUEDES", "QUARTEL", "QUEIXARMO", "QUINTOS", "QUEIMARÁ", "QUINQUIM", "QUITANDAS", "QUESTÕES", "QUARTETOS", "QUEDEMO", "QUEDASTE", "QUISERA", "QUITEMOS", "QUARENTA", "QUEIMAR", "QUEIRA", "QUEIXARIAS", "QUILATE", "QUIRGUIZE", "QUEBRASSES", "QUEIMAREMO", "QUEIXES", "QUARTETO", "QUÍMICOS", "QUITÁVAMOS", "QUITOU", "QUALIFIQUE", "QUEIXOSA", "QUEDAVAM", "QUENTINHAS", "QUIPAPÁ", "QUEBRARAM", "QUANTIFICÁ", "QUISESTE", "QUANTA", "QUEIMARÁS", "QUEROSENE", "QUEIXARÁ", "QUEIMEMO", "QUILHA", "QUESTIONE", "QUATÉRNIO", "QUEIMARDES", "QUIXERÉ", "QUISEMO", "QUEIXÁVEIS", "QUEIMARA", "QUARTEL", "QUINTETO"];
+return WORDS[Y];
+}
+
+function WORD_R(Y) {
+var WORDS = ["RIVALIZADA", "RABISCAI", "REABRIMOS", "REPENSAM", "RELATEIS", "RUBRICAI", "RELUTASSE", "REFERENCIE", "RASURAMOS", "RELAXO", "REMANEJADA", "REENVIARMO", "REFUTASSE", "RELEGAVA", "REPETÍAMOS", "RECEITO", "RETINIRIAM", "RETESAREIS", "RENDEREMOS", "RESULTARIA", "RENEGÁVEIS", "REFLETI", "RESIDIRAS", "REMAREMO", "RELEIAS", "REGALAMO", "REFORMADAS", "REAGIRIAS", "REVESTIDA", "RENOVAS", "REMENDEM", "RALARAM", "REBATES", "REALIZAM", "RALHES", "RECRUTAMOS", "RACHARAS", "REMATAVA", "RELATARA", "RIOZINHO", "REBENTARMO", "REVISÕES", "RECOLHERAM", "RELEGAREM", "RITMADOS", "RESSEQUI", "REFRESQUEI", "REDIGIREMO", "RECUANDO", "REVERENDOS", "REVELAS", "REAGÍREIS", "RETARDADO", "REPUDIAMOS", "REAVIAS", "REPORTAMO", "RABISCADA", "RIDÍCULA", "RECOMPILEM", "RESIGNAR", "RAIASTE", "RISCARAS", "REFREARÁS", "REBOLEMOS", "RECLAMADOS", "RUGADOS", "RESFRIARÁ", "REFRATAR", "RUÍSSEM", "REBAIXAREI", "REFERVAMO", "REMATANDO", "RATIFICADA", "REGIMENTOS", "RONDADAS", "RALHEMOS", "RAREFAREIS", "ROTULAVAS", "REESCREVIA", "RELINCHES", "REABRES", "RELATAMOS", "RONCAMOS", "RUTILAS", "REFINES", "REMATÁREIS", "REMETIDO", "RESGATAIS", "RELEMBROU", "RENEGARIAM", "REANIMAMO", "REMOEREMO", "REVIRES", "RELERIAS", "RESFRIOU", "REMOERA", "REMENDEIS", "REAVERDES", "RASPÁVAMOS", "RASURADOS", "REFERVO", "RESULTADO", "RESOLVAMO", "RIBEIRINHO", "REBENTEM", "REDOBRAMOS", "RECORRENTE", "REJEITARAS", "RECATADO", "REOGES", "REFREGARA", "REFORMEIS", "RANGERÁ", "REBATERAS", "REVIVIDO", "REPRESARMO", "RETIRAMO", "ROTEEMO", "RIBOMBEIS", "RECUSASSEM"];
+return WORDS[Y];
+}
+
+function WORD_S(Y) {
+var WORDS = ["SIMPATIZÁ", "SÍSMICO", "SEXÓLOGO", "SALÁRIOS", "SENHORIS", "SERVIDO", "SEGREDARÁS", "SUICIDAI", "SUBLOCARMO", "SOLAPARIAS", "SINTETIZA", "SUBMETERAS", "SUPERADAS", "SACOLEJAIS", "SERVEM", "SAFARA", "SAFARIAM", "SACIADOS", "SECULARIZÁ", "SORVEIS", "SAZONARMO", "SOMBREADAS", "SUBVERTEMO", "SEVICIAVAS", "SINGRARÁS", "SOERGUERÁS", "SOLETREMO", "SÓLIDAS", "SUAMOS", "SERRÁRAMOS", "SAGRAREMOS", "SENHORA", "SUPURADA", "SINALIZEM", "SEGREGARAS", "SUBORDINE", "SATUREMOS", "SOLUÇAREM", "SIBILAM", "SORTIREM", "SOVADAS", "SOBREI", "SORVERIAS", "SUBMARINOS", "SOBRETAXA", "SOCORROS", "SINGRÁVEIS", "SUDÁRIOS", "SAIRÍAMOS", "SECASSE", "SITIARA", "SELETIVO", "SENTARAM", "SÉTIMO", "SUCUMBEM", "SOVEMOS", "SARARIAS", "SEMEADA", "SOBRAVAS", "SUPURARMOS", "SANGUÍNEOS", "SALMODIAS", "SAMARITANO", "SURRUPIO", "SAGRAREMO", "SECARDES", "SUBTRAÍ", "SUTURÁ", "SOPRASSEM", "SALVASSES", "SUBORNAM", "SOBRADAS", "SULQUES", "SORTEAREI", "SOLAPAREIS", "SEPARADAS", "SEXAGÉSIMA", "SOVANDO", "SUBNUTRIDO", "SERRASSEM", "SALMOURÃO", "SOLAPES", "SOSSEGAVA", "SIMPLISTA", "SALMISTAS", "SOLAPÁREIS", "SAFADINHO", "SAZONAREMO", "SUSCITAMOS", "SANEANDO", "SUPERPORIA", "SERREADOS", "SUCEDEMO", "SOLADOS", "SATUREIS", "SOLARA", "SANGRENTAS", "SUPLICADOS", "SUJARES", "SOLAPASSE", "SALPICASTE", "SOÇOBRASTE", "SÍNCRONA", "SEPULCROS", "SUJEITARÁS", "SOMAVA", "SAGRADA", "SIBILAIS", "SUBLEVA", "SAFIRA", "SAMBAI", "SUBJUGARAS", "SEMEÁVAMOS", "SUJEITARAM", "SEGUÍREIS", "SUPERCÍLIO", "SUSTAREIS", "SABOREARAS", "SUBJUGAM", "SERIEIS"];
+return WORDS[Y];
+}
+
+function WORD_T(Y) {
+var WORDS = ["TAMANDUÁ", "TOLHERÁS", "TIVEMO", "TOCAIAVA", "TOSSISSEM", "TRECHO", "TERMINEI", "TRAMÓIAS", "TRACEJARÃO", "TAMPÁRAMOS", "TROÇASSES", "TRESLERMOS", "TRÍPLICE", "TÚMIDAS", "TUPARETAMA", "TOSAREM", "TUVALESA", "TOCATA", "TRICOTAR", "TEMPERAM", "TURISTA", "TECIDO", "TRINQUEMOS", "TOUREADO", "TRIUNFAIS", "TORTURAR", "TOLERARAM", "TAMPEIS", "TUMULTUÁ", "TABAPORÃ", "TOSTADA", "TRABALHES", "TREPÁSSEIS", "TUTELARMO", "TRAFIQUEIS", "TEODOLITOS", "TRUCIDARÁ", "TOCARMOS", "TELEFONEI", "TONSURANDO", "TORCERÍEIS", "TECÊRAMOS", "TIROTEIOS", "TOCAIÁREIS", "TOPASTE", "TROMBEIS", "TOMASSE", "TOKELAU", "TENSORES", "TRELIÇA", "TRAINEIRAS", "TILINTARMO", "TENISTAS", "TENDESTES", "TRUNCANDO", "TRAMITAREM", "TONALIDADE", "TRAÇADA", "TITUBEAVA", "TRICOTA", "TAQUEIS", "TITUBEIES", "TAPEMOS", "TREPAREI", "TOLHAIS", "TORREI", "TAUBATÉ", "TOSSIMO", "TRIPARTITE", "TRANCAVAS", "TRANÇARÃO", "TRANSPIREM", "TROTEAREIS", "TOUREAMOS", "TROCÁSSEIS", "TRIUNFADOS", "TROPECE", "TARIFAREMO", "TORTURAVAM", "TABULASTE", "TAMPOUCO", "TRAPACEIRO", "TECLÁVEIS", "TRANÇÁ", "TINGIRÁS", "TOLEREM", "TRIPULAVA", "TALHAIS", "TRUCIDASTE", "TINIRÍEIS", "TRUNCARÃO", "TARIFEMO", "TONSURARAS", "TRIPUDIAS", "TURVAVAS", "TOSADAS", "TRANSVIAS", "TOUREIEM", "TUNTUM", "TOLERAS", "TARDINHAS", "TROCARIA", "TEREZA", "TOLHES", "TÍSICO", "TIMBRAS", "TRANSVIARÁ", "TECLARDES", "TRIUNFADAS", "TOALHA", "TORTURANDO", "TRIPULES", "TERMINASTE", "TREMEDEIRA", "TOMBOS", "TREFILAMO", "TACITURNOS", "TERÍEIS", "TRINCAVA", "TORTURAS"];
+return WORDS[Y];
+}
+
+function WORD_U(Y) {
+var WORDS = ["URUOCA", "UIVARAM", "UNIÕES", "UNTAREMO", "URSINHA", "USAMOS", "ULULADA", "URGIRIA", "USURPARÁS", "USUFRUÍA", "UFANOSOS", "UFANÁREIS", "UNGIMOS", "UIVADA", "UIVADO", "URRARMO", "UIRAMUTÃ", "UNÍSSONO", "USARES", "UNTASTES", "URÊMICAS", "UNGIRAM", "USUFRUÍ", "USUFRUÍEIS", "UBAÍRA", "ULTRAJARÁ", "ULTIMARIAM", "UNTAVAM", "UNIFICAVAS", "URDIDAS", "ULTIMAVAM", "UMEDEÇAMOS", "UFANEMOS", "URINÁRIO", "UMEDECE", "USURPARMO", "URRASTES", "ULTRAJAVAM", "UMEDECERÃO", "UNDÉCIMO", "ULTIMAREIS", "UNGIDAS", "UMBILICAL", "ULISSES", "USAREI", "UNIREM", "URRÁSSEMOS", "UFOLOGIO", "ULTRAJARÃO", "ULULAREMO", "USURPARÁ", "URRARÍEIS", "UFANIA", "UIVARÍAMOS", "UNTAIS", "URDÍSSEMOS", "UTÓPICAS", "UIVADAS", "URBANAS", "UNIDADE", "UBIRETAMA", "ULTRAJANTE", "USUCAPIÕES", "URRAREM", "UNIRIAM", "UTILIZAS", "UTILIZARÁ", "UROCULTURA", "UMIRIM", "UMEDEÇAS", "UTILIZARES", "UGANDA", "UTILIZEI", "USARÁS", "UFANARMO", "ULTIMEMOS", "UTILIZARÁS", "UNIRÃO", "UNGINDO", "USASTE", "UROLÓGICAS", "URRAREMOS", "UGANDESAS", "ULTRAJAM", "UNGIMO", "UNGIRES", "URDIRAS", "USARMOS", "UARINI", "USURPÁREIS", "ULTRAPASSE", "URÊMICO", "USUFRUÍRA", "ULTRAJAI", "USINADA", "UTILIZARÃO", "UNIREMOS", "UMBUZEIRO", "UNTASSEM", "URUGUAIAS", "USARIAM", "UNTADO", "URBANO", "UNTÁVAMOS", "UIRAPURU", "UTOPIA", "URINAREIS", "URGENTES", "UFANARIA", "ULTIMA", "URDIREIS", "USURPEMOS", "UNIFICO", "ULULADAS", "UNIFICAREI", "USARMO", "ULCERATIVA", "ULTIMARIA", "UTENSÍLIO", "UNIFICAVAM"];
+return WORDS[Y];
+}
+
+function WORD_V(Y) {
+var WORDS = ["VOLUMES", "VALIDARÃO", "VIGIAI", "VALIOSOS", "VOLVEMOS", "VENTILARES", "VOLTASSES", "VOTIVA", "VÁCUOS", "VERTIDAS", "VADEIAM", "VIGIAIS", "VÍSCERA", "VIDRAREIS", "VERANEAVA", "VIVENCIADO", "VIOLADAS", "VENTILEIS", "VINCULEIS", "VITALÍCIO", "VOLVÊREIS", "VAIAIS", "VERGASTEI", "VIUVÁREIS", "VETUSTO", "VIGARISTAS", "VIÉSSEIS", "VIESSE", "VALÉRIA", "VADEAIS", "VINDICAREI", "VARIARÍEIS", "VENCES", "VARREREMOS", "VENEREM", "VÂNDALOS", "VOMITADO", "VERSEM", "VENERO", "VINGOU", "VINGARIA", "VIGÁRIAS", "VULGARISMO", "VENTILAMO", "VALIDAREI", "VADIARÃO", "VAIÁSSEMOS", "VADEIEM", "VIGORADAS", "VICEJEMO", "VADIARÁS", "VEGETAMOS", "VENCEMO", "VIBRÁTEIS", "VACILANTE", "VERTERDES", "VIRAVAS", "VAGADAS", "VERRUGOSAS", "VITIMARAM", "VETASSE", "VINGADOS", "VIOLARÃO", "VENDEMOS", "VÍNCULO", "VINGAVA", "VITORIOSOS", "VOLANTES", "VATAPÁS", "VIGIARAM", "VITALÍCIAS", "VICIEM", "VOLVERÁ", "VIOLÁRAMOS", "VIVENCIAS", "VERGONHA", "VAZARMOS", "VINDICAM", "VISIONÁRIO", "VOARIAS", "VICIAREMO", "VERSÍCULO", "VISÁVEIS", "VESTIRIAS", "VEXARÁS", "VIGILANTES", "VEGETEMO", "VICIARÍEIS", "VAQUEIROS", "VALIDEMO", "VASSOUREIS", "VOLATILIZA", "VEGETAREMO", "VINCAR", "VEXADA", "VARARÁS", "VELANDO", "VOCALIZES", "VELHINHOS", "VISITAVAS", "VISARÁ", "VERGASTAIS", "VESTÍREIS", "VALIDÁVEIS", "VINCULE", "VENTÁVEIS", "VIBRÁREIS", "VALERA", "VICEJÁREIS", "VIOLEI", "VADIADA", "VENTILES", "VIUVADA", "VIGIEMO", "VENTAR", "VINGUES", "VENDAMOS", "VAGUEÁVEIS", "VOCALIZARA", "VEDARMOS"];
+return WORDS[Y];
+}
+
+function WORD_X(Y) {
+var WORDS = ["XERETARES", "XAVANTINA", "XEROCARIAM", "XAVIER", "XINGAM", "XEROCASSE", "XINGARÍEIS", "XINGUARA", "XEROCOU", "XENÓFOBA", "XINGARMOS", "XINTOÍSTA", "XINGASTE", "XINGASSEM", "XEROQUEI", "XEROCÓPIAS", "XINGADO", "XINGASSES", "XEROGRAFAI", "XEROGRAFEM", "XERETAM", "XERETÁ", "XINGUEM", "XEROCADOS", "XEROCADA", "XEROCASSES", "XEROCAM", "XINGOU", "XINGAI", "XEROCAS", "XEROQUEMO", "XINGARIA", "XEROCÁVEIS", "XINGANDO", "XINGÁVEIS", "XINGAMO", "XÍCARAS", "XERETÁREIS", "XINGARÁ", "XEROGRAFAM", "XEROCAR", "XINGAVA", "XEROCARIA", "XEROGRAFIA", "XERETASTE", "XERETAREM", "XINGAMOS", "XEROCARÁS", "XEQUES", "XINGASTES", "XEROCARA", "XEROCAREI", "XEROCASSEM", "XEROCARAS", "XERETAVAS", "XINGAREI", "XERETADO", "XINGARÃO", "XEROCÓPIA", "XIITAS", "XEROCARÁ", "XERETARA", "XEROCARIAS", "XEROCARÃO", "XEROCARMOS", "XEROCA", "XERETAVA", "XEROGRAFOU", "XAROPADA", "XEROGRAFÁ", "XERETÁVEIS", "XERETARMOS", "XINGUEMO", "XINGUEMOS", "XINGAIS", "XINGAREM", "XERETADOS", "XENÓFOBOS", "XERETEMO", "XEROGRAFA", "XEROCAREIS", "XINGAVAM", "XUCRAS", "XINGARIAM", "XENÔNIO", "XEROCAVAM", "XAMBRÊ", "XINGAREMOS", "XISTOS", "XEROCAIS", "XEROCARES", "XÍCARA", "XINGADOS", "XERETARIAM", "XINGADAS", "XELINS", "XERETOU", "XERETAREIS", "XENOFOBIA", "XINGARIAS", "XINTOÍSMO", "XINGAVAS", "XERETARAS", "XINGAÇÕES", "XEROCAI", "XEROCADO", "XERETAIS", "XEROCÁ", "XENÓFOBAS", "XERETADA", "XINTOÍSTAS", "XERETARÁ", "XERETES", "XINGAÇÃO", "XENÓFOBO", "XERETEIS", "XINGASSE", "XEROQUEM", "XERETAMOS", "XEROGRAFO"];
+return WORDS[Y];
+}
+
+function WORD_Z(Y) {
+var WORDS = ["ZÍPERES", "ZANGAR", "ZURRARIAS", "ZUMBAMOS", "ZANZARMO", "ZURRAREM", "ZERASSE", "ZURRARIAM", "ZUMBINDO", "ZOMBADOS", "ZANGAVAM", "ZANGÕES", "ZANZAREMO", "ZARPADOS", "ZARPEMOS", "ZOMBARÁ", "ZARPAREI", "ZANGARÃO", "ZOOLOGIA", "ZANGAS", "ZURROS", "ZUMBÍSSEIS", "ZOMBARÃO", "ZERAMO", "ZANGADAS", "ZOMBEIS", "ZARPADA", "ZELARÃO", "ZOOTECNIA", "ZURRARAM", "ZURRÁSSEIS", "ZANZAVAM", "ZANZASSEM", "ZELÂNDIA", "ZURREMOS", "ZURRASTES", "ZUNISSE", "ZARPÁVAMOS", "ZELÁVEIS", "ZOMBAREIS", "ZABELÊ", "ZANZÁVEIS", "ZUNZUNS", "ZERÉSIMAS", "ZOMBARA", "ZANGANDO", "ZERARÍAMOS", "ZUNIREM", "ZOMBÁVAMOS", "ZOMBAIS", "ZUMBIREIS", "ZAMBIANOS", "ZÊNITE", "ZANGARÁ", "ZURREIS", "ZELAVA", "ZUMBISSE", "ZANZARAM", "ZELANDO", "ZERAVAS", "ZOMBARAS", "ZELOSOS", "ZURRASSEM", "ZERARÁ", "ZANGARDES", "ZELARMOS", "ZAMBIANAS", "ZOMBADA", "ZELEMO", "ZANGARÍEIS", "ZUMBIMO", "ZANZARIAS", "ZANGÃO", "ZERÁSSEMOS", "ZANGAIS", "ZOMBEMOS", "ZERAREIS", "ZANGASTE", "ZANZASSE", "ZANZAREM", "ZANZASTES", "ZANGAREMOS", "ZAGUEIRO", "ZANZARA", "ZARPARÁ", "ZERÁVEIS", "ZOMBAREMO", "ZANZASSES", "ZANZES", "ZUNIREMOS", "ZELOSA", "ZARPAVA", "ZUMBIRIAS", "ZUMBIRAM", "ZOOLÓGICAS", "ZUMBIREM", "ZOMBARAM", "ZUMBIRIA", "ZELARES", "ZANGAREM", "ZERÁSSEIS", "ZELEIS", "ZARPARDES", "ZUNIMO", "ZANGÁVEIS", "ZURRARMOS", "ZARPAREMO", "ZERARIA", "ZIRCÓNIO", "ZELAVAM", "ZURRAREIS", "ZOMBARES", "ZUNIREIS", "ZOMBASTES", "ZUMBIS", "ZELOSAS", "ZANGARMO", "ZELADOR", "ZUNIDO", "ZANZASTE"];
+return WORDS[Y];
+}
+
+function SOUND1() {
+//snd="ERRO";
+var snd = "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QhkoNGRFABAnAAAYQymklFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSCmllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSqmklFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimVUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFJKKaWUUkoppZRSSimllFIKAJCKcACQejChDBQashIASAUAAIxRSinGnIMQMeYYY9BJKClizDnGHJSSUuUchBBSaS23yjkIIaTUUm2Zc1JaizHmGDPnpKQUW805h1JSi7HmmmvupLRWa64151paqzXXnHPNubQWa64515xzyzHXnHPOOecYc84555xzzgUA4DQ4AIAe2LA6wknRWGChISsBgFQAAAIZpRhzzjnoEFKMOecchBAihRhzzjkIIVSMOeccdBBCqBhzzDkIIYSQOecchBBCCCFzDjroIIQQQgcdhBBCCKGUzkEIIYQQSighhBBCCCGEEDoIIYQQQgghhBBCCCGEUkoIIYQQQgmhlFAAAGCBAwBAgA2rI5wUjQUWGrISAAACAIAclqBSzoRBjkGPDUHKUTMNQkw50ZliTmozFVOQORCddBIZakHZXjILAACAIAAgwAQQGCAo+EIIiDEAAEGIzBAJhVWwwKAMGhzmAcADRIREAJCYoEi7uMAsA1zQxV0HQghCEILKG0ABCTg44YYn3vCEG5lEUxTGIAAAAAAADADgAQDgoAAiIpqrsLjAyNDY4OjwCAAAAAAAFgD4AAA4PoCIiOYqLC4wMjQ2ODo8AgAAAAAAAAAAgICAAAAAAABAAAAAgIBPZ2dTAAAAWgAAAAAAAGQr/HMCAAAARC/q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"
+return snd;
+}
+
+function SOUND2() {
+//snd="ACERTO";
+var snd = "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"
+return snd;
+}
+
+</script>
+	<button class="button" id="BTN00" style="position:absolute;left:7.5%;top:56.5%;" onclick="RELOAD()">Jogar</button>
+	<button class="button" id="BTN01" style="position:absolute;left:7.5%;top:56.5%;" onclick="TESTA_LETRA()">OK</button>
+	<button class="button" id="BTN02" style="position:absolute;left:7.5%;top:56.5%;" onclick="PegaPalavra()">OK</button>
+	<button class="button" id="BTN03" style="position:absolute;right:7.5%;top:56.5%;" onclick="DICA()">Dica</button>
+	
+	<button class="button" id="BTN06" style="position:absolute;right:7.5%;top:56.5%;" onclick=window.open(LINK);ClearBTN();></button>
+	<p id="AVISO">Escolha o "Tipo de Palavra"</p>
+	<p id="EE">EASTER EGG</p>
+		
+		
+		<form>
+			
+		</form>
+		
+		
+
+
+</body>
+</html>

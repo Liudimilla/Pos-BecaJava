@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<head>
+<style>
+body {
+	background-color: rgb(59, 33, 253);
+	background-image: url("imagem/fig1.PNG");
+	transform: translate(50px, 100px);
+	background: #ffffff url("imagem/fig1.PNG") no-repeat right top;
+	margin-right: 200px;
+	background-image: url("gradient_bg.png");
+	background-repeat: repeat-x;
+}
+
+h1 {
+	text-align: center;
+	text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+	font-size: 60px
+}
+
+h2 {
+	text-decoration: overline;
+	color: white;
+	text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+p.thicker {
+	font-style: oblique;
+	font-size: 18px font-weight: 900;
+	text-shadow: 0 0 3px #0000FF;
+}
+</style>
+
+<script type="text/javascript">
+	function nivel1() {
+		//alert("cliquei")
+		window.location
+				.replace("http://localhost:8080/primeirojogodaforca/Jogo1.html");
+		//window.location.href="/parte2.xhtml"
+	}
+</script>
+</head>
+<h:body>
+
+	<button onclick="nivel1()"></button>
+	<h1>Jogo da Forca</h1>
+	<h2>Vamos jogar!!</h2>
+	<p class="thicker">[1] Regras do Jogo</p>
+	<button type="button1" onclick="loadDoc()">Verifique as regras</button>
+	<p id="demo"></p>
+	<p class="thicker">[2] Escolha o nivel</p>
+	<h:commandButton value="Nivel 1" onclick="nivel1()" />
+
+
+	<h:form>
+		<h:commandButton value="Nivel 2" action="Jogo2" />
+		<br />
+		<h:commandButton value="Nivel 3" action="forca" />
+	</h:form>
+		<script>
+		function loadDoc() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function() {
+				document.getElementById("demo").innerHTML = this.responseText;
+			}
+			xhttp.open("GET", "Dica5.txt");
+			xhttp.send();
+		}
+	</script>
+	<form>
+		<p class="thicker">[3] Sair do jogo;</p>
+		<h:commandButton value="Sair" action="index" />
+	</form>
+
+
+
+
+</h:body>
+
+</html>

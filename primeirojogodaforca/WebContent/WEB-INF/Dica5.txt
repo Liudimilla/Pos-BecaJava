@@ -1,0 +1,8 @@
+Dica:<br/>
+<br/>
+* O Jogador podera apenas fornecer uma letra por vez; <br/>
+* O Jogador podera errar no maximo 5 vezes sem perder o jogo;<br/>
+* Caso a letra ja tenha sido digitada nao sera contabilizado como <br/>
+aceito e nem como erro.<br/>
+* Para cada partida será mostrada uma dica e a <br/>
+quantidade de letra da palavra.<br/>
